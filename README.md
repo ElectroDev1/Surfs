@@ -17,7 +17,7 @@
   * Handle the creation of surfaces and recreation in case they are gone in a single function
   * All surfaces are saved in a global map and can be accessed with only a string, without the need to create new variables for every surface
   * You can define when a surface will be freed from memory the moment you create it with built in or custom methods
-  * Freeing surfaces from memory in the draw event won't cause memory leaks to occour
+  * Freeing surfaces from memory in the draw event won't cause memory leaks to occur
   * The library contains many functions to quickly handle surfaces
   </p>
  <hr>
