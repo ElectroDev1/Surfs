@@ -128,6 +128,21 @@ Surfs(surface name,surface width,surface height,[destroy method,args]);
 
 <hr>
 
+# DESTROY METHODS
+
+<p>Surfs features a couple of destroy methods to tell when to free a surface, but it suggested to use your own custom methods.
+  </p>
+ <br>
+ <h3>"obj",object/[object1,object2..]</h3>
+ <p>Checks if one or more objects exist, and if they don't, the surface is freed.</p>
+ <br>
+ <h3>"region",[surface x,surface y,left,top,right,bottom],inside</h3>
+ <p>Checks if the surface can fit inside a specific region, its rigth and bottom positions are calculated automatically.</p>
+ <br>
+<h3>Gamemaker's/Custom methods</h3>
+<p>You can assign any kind of function as a destroy method, the surface will be freed if the method returns true.</p>
+<br>
+
 # ABOUT AND CREDITS
 Holemap is licensed under the <a href="https://github.com/ElectroDev1/Surfs/blob/main/LICENSE.md">MIT license</a>
 <br><br>
