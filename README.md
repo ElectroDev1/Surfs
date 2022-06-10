@@ -144,6 +144,6 @@ Surfs(surface name,surface width,surface height,[destroy method,args]);
 <br>
 
 # ABOUT AND CREDITS
-Holemap is licensed under the <a href="https://github.com/ElectroDev1/Surfs/blob/main/LICENSE.md">MIT license</a>
+Surfs is licensed under the <a href="https://github.com/ElectroDev1/Surfs/blob/main/LICENSE.md">MIT license</a>
 <br><br>
 Surfs made by <a href="https://github.com/ElectroDev1">Electro</a>
