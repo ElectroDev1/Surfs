@@ -122,6 +122,12 @@ Surfs(surface name,surface width,surface height,[destroy method,args]);
 
   * surface name {string} : the name assigned to the surface
 </p>
+<br>
+<h3>Surfs_get_texture(surface name)</h3>
+<p>Returns the surface texture's pointer.
+  
+  * surface name {string} : the name assigned to the surface
+ </p>
  <br>
  <h3>Surfs_debug()</h3>
  <p>Draws informations related to Surfs.
