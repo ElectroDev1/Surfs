@@ -1,3 +1,6 @@
+<p align="center">
+  <img src="https://github.com/ElectroDev1/Surfs/blob/main/logo.png" style="display:block; margin:auto; width:300px">
+</p>
 <h1 align="center">SURFS</h1>
 <p align="center" >
   A library for Gamemaker v2022.5+ that makes using surfaces easier than ever
@@ -8,8 +11,8 @@
  
  # WHAT IS SURFS
  <p>
-  Surfs is a library made for Gamemaker v2022.5+ that handles all the boring and monotonous parts of using surfaces in Gamemaker, with only a few functions and no need
-  to use multiple events.
+  Surfs is a library made for Gamemaker v2022.5+ that handles all the boring and monotonous parts of using surfaces in Gamemaker, with only a few simple functions and no need
+  to use multiple events or extra variables.
   <br><br>
   Here's what the library can do:
   <br>
@@ -45,9 +48,7 @@ Surfs(surface name,surface width,surface height,[destroy method,args]);
   
   This function can be put right before you draw the surface, the surface will only be created when it doesn't exist.
   <br>
-  You can assign the surface to a variable, but it's not necessary when using Surf's built in functions.
-  <br>
-  Now you can use the surface's name as a reference to use the surface itself.
+  Surfs comes with many built-in functions where you only need to the surface's name to use it, but you can always use ```Surfs_get(surface name) ``` in case you need to use the surface in other parts of your code.
  </p>
  <hr>
  
@@ -121,6 +122,12 @@ Surfs(surface name,surface width,surface height,[destroy method,args]);
 
   * surface name {string} : the name assigned to the surface
 </p>
+<br>
+<h3>Surfs_get_texture(surface name)</h3>
+<p>Returns the surface texture's pointer.
+  
+  * surface name {string} : the name assigned to the surface
+ </p>
  <br>
  <h3>Surfs_debug()</h3>
  <p>Draws informations related to Surfs.
