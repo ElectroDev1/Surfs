@@ -1,3 +1,9 @@
+/*
+Functions used to operate Surfs
+
+Note: Functions marked with an 'X' should not be used
+*/
+
 function Surfs_map_exists(){
     return variable_global_exists("SurfsMap") && ds_exists(SurfsMap,ds_type_map);	
 }
@@ -8,7 +14,7 @@ function Surfs_check(){
 	}
 }
 
-function Surf_struct(width,height,garbageMethod) constructor {
+function Surf_struct(width,height,garbageMethod) constructor { //'X'
     	surf = surface_create(width,height);
 		MyGarbage = garbageMethod;
 		exists = true;
@@ -98,4 +104,8 @@ function Surfs_debug(){
 	for(var a=0; a<ds_map_size(SurfsMap); a++){
 	    draw_text(room_width-10,10+12*a,"'"+names[a]+"' :Surf "+string(a+1));
 	}
+}
+	
+function Surfs_get_texture(name){
+	return surface_get_texture(Surfs_get(name));
 }
