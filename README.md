@@ -123,7 +123,7 @@ Surfs(surface name,surface width,surface height,[destroy method,args]);
 </p>
  <br>
  <h3>Surfs_debug()</h3>
- <p>Draws informations related to Surfs
+ <p>Draws informations related to Surfs.
 </p>
 
 <hr>
