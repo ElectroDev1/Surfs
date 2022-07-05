@@ -1,54 +1,43 @@
 /*
 Functions used to operate Surfs
-
-Note: Functions marked with an 'X' should not be used
 */
 
-function Surfs_map_exists(){
-    return variable_global_exists("SurfsMap") && ds_exists(SurfsMap,ds_type_map);	
-}
-
-function Surfs_check(){
-    if(!Surfs_map_exists()){
-	   show_error("\nSurfs Map does not exist.\n",true);	
-	}
-}
-
-function Surf_struct(width,height,garbageMethod) constructor { //'X'
-    	surf = surface_create(width,height);
-		MyGarbage = garbageMethod;
-		exists = true;
-		surfw=width;
-		surfh=height;
-}
-
-function Surfs(name,width,height,garbageMethod){
+/// @description	Creates a new surface and assigns it to the global map as a Surfs, only if a Surfs with the same name doesn't exist.
+function Surfs(name,width,height,garbageMethod,slapMethod=-4){
 	
 	//Check if the entry in the data structure exists or if a struct is defined in it
 	if(!ds_map_exists(SurfsMap,name) || !is_struct(SurfsMap[? name])){
 		
 		//Add a new entry to the data structure with a struct containing the surface
-		ds_map_add(SurfsMap,name, new Surf_struct(width,height,garbageMethod) );
+		ds_map_add(SurfsMap,name, new Surf_struct(width,height,garbageMethod,slapMethod) );
 
-	}else{
+	}else if(!surface_exists(SurfsMap[? name].surf)){
 		
-	   //Recreate the surface if it's somehow gone
-	   if(!surface_exists(SurfsMap[? name].surf)){
-		   SurfsMap[? name].surf = surface_create(width,height);   
-	   }
+			SurfsMap[? name].surf = surface_create(width,height);   
+		   	
+			if(is_method(slapMethod)){
+				
+			   surface_set_target(SurfsMap[? name].surf);
+	   
+			   slapMethod();
+	   
+			   surface_reset_target();
+			}
+	   
 	   
 	}
-	
+
 	return SurfsMap[? name].surf;
 	
 }
-
+/// @description	Edit an existing Surfs' Garbage method
 function Surfs_set_GargabeMethod(name,garbageMethod){
    	if(ds_map_exists(SurfsMap,name) && is_struct(SurfsMap[? name])){
 		SurfsMap[? name].MyGarbage = garbageMethod;
 	}
 }
-	
+
+/// @description	Free a Surfs from memory
 function Surfs_free(name){
     if(ds_map_exists(SurfsMap,name) && is_struct(SurfsMap[? name])){
 	   if(surface_exists(SurfsMap[? name].surf)){
@@ -62,37 +51,45 @@ function Surfs_free(name){
 	}
 }
 
+/// @description	Check if a Surfs exists in memory
 function Surfs_exists(name){
    return SurfsMap[? name].exists;
 }
 
+/// @description	Get the surface ID of a Surfs
 function Surfs_get(name){
    if(!Surfs_exists(name)){exit;}
    return SurfsMap[? name].surf;
 }
 
+/// @description	Get the width of the surface ID of a Surfs
 function Surfs_width(name){
    return SurfsMap[? name].surfw;
 }
 
+/// @description	Get the height of the surface ID of a surfs
 function Surfs_height(name){
    return SurfsMap[? name].surfh;
 }
 
+/// @description	Set the surface ID of a Surfs as the drawing target
 function Surfs_set_target(name){
    return surface_set_target(Surfs_get(name));
 }
 
+/// @description	Draw a Surfs' surface
 function Surfs_draw(name,x,y){
    draw_surface(Surfs_get(name),x,y);	
 }
 
+/// @description	Resize a Surfs' size
 function Surfs_resize(name,width,height){
    surface_resize(Surfs_get(name),width,height);
    SurfsMap[? name].surfw=width;
    SurfsMap[? name].surfh=height;
 }
 
+/// @description	Draw some information about Surfs
 function Surfs_debug(){
     draw_set_valign(fa_top);draw_set_halign(fa_left);
 	draw_text(10,10,"Surfs v1.0 by Electro\n\nSurfs created: "+string(ds_map_size(SurfsMap)));
@@ -105,7 +102,8 @@ function Surfs_debug(){
 	    draw_text(room_width-10,10+12*a,"'"+names[a]+"' :Surf "+string(a+1));
 	}
 }
-	
+
+/// @description	Get the texture of a Surf's surface
 function Surfs_get_texture(name){
 	return surface_get_texture(Surfs_get(name));
 }

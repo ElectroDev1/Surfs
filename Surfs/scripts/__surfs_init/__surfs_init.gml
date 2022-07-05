@@ -1,22 +1,31 @@
+/*
+SURFS
 
-globalvar SurfsMap;
-SurfsMap = ds_map_create();
+A small library for Gamemaker that makes using surfaces easier than ever, created by Electro
 
+Current version: 1.1.0
+Repository and instructions: https://github.com/ElectroDev1/Surfs
+*/
+
+//Initialize Surfs
 show_debug_message("")
 show_debug_message("Surfs v1.0 - by Electro")
 show_debug_message("")
 
+//Create map to store Surfs IDs
+globalvar SurfsMap;
+SurfsMap = ds_map_create();
 
-//This is the frame interval for each check, increase it if the library is affectin performance
+
+//This is the frame interval for each check, increase it if the library is affectin performance!
 #macro GARBAGE_TIME room_speed/60
 
+//Time source for checking and deleting unused Surfs, sort of a garbage collector
 globalvar GarbageTimeSource;
 GarbageTimeSource = time_source_create(time_source_global,GARBAGE_TIME,
 time_source_units_frames,
 
 function(){
-	
-	//Garbage collector
 	
 	Surfs_check();
 	var mapnames = ds_map_keys_to_array(SurfsMap);
@@ -55,7 +64,7 @@ function(){
 				
 					default: show_error("\nGarbage Method specified doesn't exist, check for a list of them in __surfs_init or use a custom defined method.\n",true); break;
 					
-					case "obj": //Free when one or more objects don't exist
+					case "obj":
 					   if(!is_array(args)){
 						  if(!instance_exists(args)){ Surfs_free(mapnames[a]); }   
 					   }else{
@@ -107,4 +116,33 @@ function(){
 	
 },[],-1);
 
+//Start time source
 time_source_start(GarbageTimeSource);
+
+//Functions used by Surfs under the hood
+
+function Surfs_map_exists(){	
+    return variable_global_exists("SurfsMap") && ds_exists(SurfsMap,ds_type_map);	
+}
+
+function Surfs_check(){
+    if(!Surfs_map_exists()){
+	   show_error("\nSurfs Map does not exist.\n",true);	
+	}
+}
+
+function Surf_struct(width,height,garbageMethod,slapMethod) constructor { //'X'
+    	surf = surface_create(width,height);
+		MyGarbage = garbageMethod;
+		exists = true;
+		surfw=width;
+		surfh=height;
+		if(is_method(slapMethod)){
+				
+			   surface_set_target(surf);
+	   
+			   slapMethod();
+	   
+			   surface_reset_target();
+		}
+}
