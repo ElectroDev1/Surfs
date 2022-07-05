@@ -148,6 +148,16 @@ Surfs(surface name,surface width,surface height,[destroy method,args]);
  <br>
 <h3>Gamemaker's/Custom methods</h3>
 <p>You can assign any kind of function as a destroy method, the surface will be freed if the method returns true.</p>
+
+<hr>
+
+# SLAP METHODS
+
+<p>Slap methods let you apply things to a Surf right after it's created, this is useful for surfaces that are mostly static.
+<br>
+However, because of how surfaces work, it's recommended to only use it on surfaces with non moving elements, so be mindful about that.
+</p>
+
 <br>
 
 # ABOUT AND CREDITS
